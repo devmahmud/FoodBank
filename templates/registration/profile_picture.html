@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block widgets %}{% endblock widgets %}
+{% block title %}{{ block.super }}| Change Profile Picture{% endblock title %}
+{% block content %}
+<div class="row my-3 mb-5">
+    <div class="col-md-6 offset-md-3 mb-5">
+        <div class="card">
+            <h5 class="card-header text-center">Change Profile Picture</h5>
+            <div class="card-body text-center">
+                <img class="profile_picture" src="{{ request.user.profile.image.url }}" alt="{{request.user}}">
+                <form action="." method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="image" class="form-control-file my-3">
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

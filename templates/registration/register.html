@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block widgets %}{% endblock widgets %}
+{% block title %}{{ block.super }}| User Registration{% endblock title %}
+{% block content %}
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <h5 class="card-header text-center">User Registration</h5>
+            <div class="card-body">
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+                <p class="mt-3">Already have an account? <a href="{% url 'login' %}">Login here..</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

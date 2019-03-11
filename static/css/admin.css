@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+#header {
+    height: 50px;
+    background: #343435;
+    color: #fff;
+}
+
+#branding h1 {
+    color: #fff;
+
+}
+
+#heading_text {
+    font-family: 'Pacifico',
+        cursive;
+}
+
+a:link,
+a:visited {
+    color: #2d3542;
+    text-decoration: none;
+}
+
+div.breadcrumbs {
+    background: #dee4e2;
+    color: #000000;
+}
+
+div.breadcrumbs a {
+    color: #333;
+}
+
+div.breadcrumbs a:focus,
+div.breadcrumbs a:hover {
+    color: #005db9;
+}
+
+.module caption,
+.inline-group h2 {
+    background: #3e4140;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+    background: #4b515c;
+    color: #fff;
+}
+
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+    background: #4b515c;
+}
+
+#changelist-filter h2 {
+    background: #2a2b2c;
+}
+
+.button:active,
+input[type="submit"]:active,
+input[type="button"]:active,
+.button:focus,
+input[type="submit"]:focus,
+input[type="button"]:focus,
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background: #1f2020;
+}
+
+.button.default:active,
+input[type="submit"].default:active,
+.button.default:focus,
+input[type="submit"].default:focus,
+.button.default:hover,
+input[type="submit"].default:hover {
+    background: #1f2020;
+}

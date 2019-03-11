@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block widgets %}{% endblock widgets %}
+{% block title %}{{ block.super }}| Dashboard{% endblock title %}
+{% block content %}
+<div class="row my-3 mb-5">
+    <div class="col-md-12 mb-5">
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="card">
+            <h5 class="card-header text-center">My All Posts</h5>
+            <div class="card-body">
+                {% if object_list %}
+                <table class="table text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Post</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Taste</th>
+                            <th scope="col">Persons</th>
+                            <th scope="col">Likes</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in object_list %}
+                        <tr>
+                            <td><a href="{% url 'detail' obj.slug %}">{{ obj.title }}</a></td>
+                            <td>{{ obj.categories }}</td>
+                            <td>{{ obj.price }}</td>
+                            <td>{{ obj.taste }}</td>
+                            <td>{{ obj.persons }}</td>
+                            <td>{{ obj.likes_count }}</td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="{% url 'update' obj.slug %}" role="button">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="{% url 'delete' obj.slug %}" role="button">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>You have not any post yet !! <a href="{% url 'create' %}">Create a new one..</a></p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

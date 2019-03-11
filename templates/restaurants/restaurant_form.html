@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if 'update' in request.path %}{{ block.super }}| Update post{% else %}{{ block.super }}| Create New post{% endif %}
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 my-4">
+        <div class="card">
+            <h5 class="card-header text-center">
+                {% if 'update' in request.path %}
+                Update Post
+                {% else %}
+                Create Post
+                {% endif %}
+            </h5>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}

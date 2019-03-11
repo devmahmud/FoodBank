@@ -1,0 +1,44 @@
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4">
+    <!-- Search Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Search</h5>
+        <div class="card-body">
+            <form action="{% url 'home' %}" method="get">
+                <div class="input-group">
+                    <input type="search" name='q' class="form-control" placeholder="Search for..." value="{{ request.GET.q }}" required>
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="submit">Go!</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Categories</h5>
+        <div class="card-body">
+            <div class="row">
+                {% for cat in categories %}
+                <div class="col-md-4">
+                <a href="{% url 'home' %}?q={{ request.GET.q }}&cat={{ cat }}">{{ cat }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Recent Posts</h5>
+        <div class="card-body">
+            <ul>
+                {% for post in recent_posts %}
+                <li><a href="/{{ post.slug }}">{{ post.title }}s</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block widgets %}{% endblock widgets %}
+{% block title %}{{ block.super }}| User Login{% endblock title %}
+{% block content %}
+<div class="row my-4">
+    <div class="col-md-12">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="col-md-4 offset-md-4" style="margin-top:30px; margin-bottom: 120px">
+        <div class="card">
+            <h5 class="card-header text-center">User Login</h5>
+            <div class="card-body">
+                {% if form.errors %}
+                <p style="color:red">Your username and password didn't match. Please try again.</p>
+                {% endif %}
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">{{ form.username.label_tag }}</label>
+                        <input type="text" name="username" autofocus="" required="" id="id_username" class="form-control"
+                            placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" name="password" required="" id="id_password" class="form-control"
+                            placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

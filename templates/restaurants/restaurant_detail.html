@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}{{ block.super }}| {{ object.title }}{% endblock title %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Title -->
+        <h1 class="mt-4">{{ object.title }}</h1>
+        <!-- Author -->
+        <p class="lead">
+            by
+            {% if object.user.get_full_name %}
+            <a href="/?author={{ object.user }}">{{ object.user.get_full_name }}</a>
+            {% else %}
+            <a href="/?author={{ object.user }}">{{ object.user.username }}</a>
+            {% endif %}
+        </p>
+
+        <hr>
+        <!-- Date/Time -->
+        <p>Posted on, {{ object.created_at|naturaltime }}</p>
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="{{ object.image.url }}" alt="{{ object.title }}">
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">{{ object.details }}</p>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>Platter</td>
+                    <td>{{ object.title }}</td>
+                </tr>
+                <tr>
+                    <td>Category:</td>
+                    <td>
+                        {% for cat in object.get_categories %}
+                        <a href="/?cat={{ cat }}">{{ cat }}</a>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>{{ object.location }}</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>{{ object.price }} Taka, Vat {{ object.vat }}%</td>
+                </tr>
+                <tr>
+                    <td>Persons</td>
+                    <td>{{ object.persons }}</td>
+                </tr>
+                <tr>
+                    <td>Taste</td>
+                    <td>{{ object.taste }} out of 10</td>
+                </tr>
+                <tr>
+                    <td>Likes</td>
+                    <td>{{ object.likes_count }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <!-- Comments Form -->
+        <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="hidden" name='slug' value="{{ object.slug }}">
+                        <textarea name="comment" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Single Comment -->
+
+        {% if object.comments.all %}
+        {% for comment in object.comments.all %}
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle comment_pic" src="{{ comment.user.profile.image.url }}" alt="Image">
+            <div class="media-body">
+                <h5 class="mt-0">{{ comment.user.get_full_name }}</h5>
+                <p>{{ comment.text }}<br>
+                    <small><i class="far fa-clock"></i>&nbsp{{ comment.created_at }}</small>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endblock content %}

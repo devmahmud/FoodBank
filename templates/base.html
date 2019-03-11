@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Food Bank">
+    <meta name="author" content="Mahmudul Alam">
+
+    <title>{% block title %}FoodBank {% endblock title %}</title>
+    <!-- css -->
+    {% include 'partials/_styles.html' %}
+
+</head>
+
+<body>
+    <!-- navigation -->
+    {% include 'partials/_navbar.html' %}
+
+    <!-- main content -->
+    <div class="container">
+        {% block content %}{% endblock content %}
+        
+        <!-- widgets -->
+        {% block widgets %}{% include 'partials/_widgets.html' %}{% endblock widgets %}
+    </div>
+    
+    <!-- footer -->
+    {% include 'partials/_footer.html' %}
